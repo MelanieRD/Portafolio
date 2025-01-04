@@ -1,0 +1,55 @@
+import { useEffect, useRef, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import { animated, useScroll, useSpring } from "@react-spring/web";
+
+function App() {
+  const [opacity, api] = useSpring(() => ({
+    from: { opacity: 0},
+    to: { opacity: 1 },
+    config: { duration: 3000 },
+  }));
+
+  const [moveCharacter, moveApi] = useSpring(() => ({
+    from: { opacity: 0, x: 0 },
+    to: { opacity: 1 },
+    config: { duration: 3000 },
+  }));
+
+  const handleClick = () => {
+    api.start({
+      from: {
+        x: 0,
+      },
+      to: {
+        x: 100,
+      },
+    });
+  };
+
+  return (
+    <div className="App">
+      <Parallax pages={3}>
+        <ParallaxLayer onClick={handleClick} sticky={{ start: 0.4, end: 0.1 }} style={{ display: "flex", justifyContent: "center", alignItems: "center", ...opacity }}>
+          <img src="/img/girl.png" />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={1} offset={0} factor={1.5} style={{ backgroundImage: `url(/img/galaxyd.jpg)`, backgroundSize: "cover" }}>
+          <h2>My Portafolio</h2>
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5} offset={1} factor={2} style={{ backgroundImage: "url(/img/galaxy.jpg)", backgroundSize: "cover" }}>
+          <h2>Hi</h2>
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5} offset={1} factor={2} style={{ backgroundImage: "url(/img/moon.jpg)", backgroundSize: "cover" }}>
+          <h2>What's up</h2>
+        </ParallaxLayer>
+      </Parallax>
+    </div>
+  );
+}
+
+export default App;
