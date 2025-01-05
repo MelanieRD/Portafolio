@@ -1,18 +1,24 @@
 .app {
 }
 
+.layerIMG {
+  display: flex;
+}
+
+.character {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 h2 {
   margin-top: 40px;
   text-align: center;
-  font-family: cubano, sans-serif;
-  font-weight: 100;
+  font-family: system-ui;
+  font-weight: 600;
   color: white;
-  font-size: 10vw;
+  font-size: 15vh;
   text-shadow: -0.04em 0.04em 0 #000, 0.04em 0.04em 0 #000, 0.04em -0.04em 0 #000, -0.04em -0.04em 0 #000;
-}
-
-.imgC {
-  width: 40%;
 }
 
 .backg {
@@ -20,6 +26,7 @@ h2 {
   margin: 0px;
   padding: 0px;
 }
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
