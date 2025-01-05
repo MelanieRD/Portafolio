@@ -11,3 +11,9 @@
   /* text-shadow: offset-x offset-y blur-radius color; */
   text-shadow: -0.04em 0.04em 0 #000, 0.04em 0.04em 0 #000, 0.04em -0.04em 0 #000, -0.04em -0.04em 0 #000;
 }
+
+.tools {
+  color: black;
+  text-shadow: none;
+  font-weight: 700;
+}

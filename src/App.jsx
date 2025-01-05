@@ -3,8 +3,9 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { animated, useInView, useScroll, useSpring } from "@react-spring/web";
+import { a, animated, useInView, useScroll, useSpring, useTrail } from "@react-spring/web";
 import { Tech } from "./components/Tech/Tech";
+import { use } from "react";
 
 function App() {
   const [xcharacterCurrentPosition, setXCharacterCurrentPosition] = useState(0);
@@ -14,26 +15,63 @@ function App() {
 
   const containerRef = useRef(null);
   const characterRef = useRef(null);
-  const [refInView, ApiInView] = useInView({
+
+  const [refh2TextAboutInView, apiInView] = useInView({
     rootMargin: "0px 0px 0px 0px",
   });
 
-  const [refOpacityScroll, opacityScroll] = useInView(
-    () => ({
-      from: {
-        opacity: 0,
-        y: 100,
-      },
-      to: {
-        opacity: 1,
-        y: 0,
-      },
-      config: { duration: 200 },
-    }),
+  const [proyectsPageRef, apiProyectInView] = useInView({
+    rootMargin: "-0px 0px 0px 0px",
+  });
+
+  const h2TextSplited = "About me".split("");
+  const [h2Effect, h2EffectApi] = useTrail(
+    h2TextSplited.length,
     {
-      rootMargin: "50% 0%",
-    }
+      config: { mass: 5, tension: 2000, friction: 200, duration: 100 },
+      opacity: apiInView ? 1 : 0,
+      x: apiInView ? 0 : 20,
+      height: apiInView ? 0 : 50,
+      from: { opacity: 0, x: 20, height: 0 },
+    },
+    []
   );
+
+  const h2TextProyectSplited = "Proyects".split("");
+  const [ProyectH2Effect, ProyectH2EffectApi] = useTrail(
+    h2TextProyectSplited.length,
+    {
+      config: { mass: 5, tension: 2000, friction: 200, duration: 200 },
+      opacity: apiProyectInView ? 1 : 0,
+      x: apiProyectInView ? 0 : 20,
+      height: apiProyectInView ? 0 : 50,
+      from: { opacity: 0, x: 20, height: 0 },
+    },
+    []
+  );
+
+  useEffect(() => {
+    console.log(apiProyectInView);
+    if (apiInView) {
+      h2EffectApi.start({
+        opacity: 1,
+        x: 0,
+        height: 50,
+      });
+    } else {
+      h2EffectApi.start({ opacity: 0 });
+    }
+
+    if (apiProyectInView) {
+      ProyectH2EffectApi.start({
+        opacity: 1,
+        x: 0,
+        height: 50,
+      });
+    } else {
+      ProyectH2EffectApi.start({ opacity: 0 });
+    }
+  }, [apiInView, apiProyectInView]);
 
   const gradientBg = useSpring({
     background: toggle ? "linear-gradient(120deg, #1c2754 0%,rgb(71, 19, 69) 100%)" : "linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)",
@@ -168,18 +206,42 @@ function App() {
 
         {/* background Final */}
 
-        <ParallaxLayer speed={0.5} offset={1} factor={2} style={{}} className={"ParallaxLayer"}>
-          <animated.h2>About me</animated.h2>
+        <ParallaxLayer speed={0.5} offset={0.6} factor={2} style={{ display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center" }} className={"ParallaxLayer"}>
+          <div ref={refh2TextAboutInView}>
+            <h2>
+              {h2Effect.map((h2animation, index) => (
+                <animated.i key={index} style={{ ...h2animation }}>
+                  {h2TextSplited[index]}
+                </animated.i>
+              ))}
+            </h2>
+          </div>
         </ParallaxLayer>
 
         {/* Inventory Technology*/}
 
-        <ParallaxLayer speed={0.5} offset={1.3} factor={2} style={{ display: "flex", justifyContent: "center" }} className={"ParallaxLayer"}>
+        <ParallaxLayer speed={0.5} offset={1.1} factor={2} style={{ display: "flex", justifyContent: "center" }} className={"ParallaxLayer"}>
           <Tech />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5} offset={2} factor={3} style={{ backgroundImage: "url(/img/moon.jpg)", backgroundSize: "cover" }} className={"ParallaxLayer"}>
-          <h2>Proyects</h2>
+        {/* Proyects */}
+
+        <ParallaxLayer
+          speed={0.5}
+          offset={2}
+          factor={0.5}
+          style={{ backgroundColor: "black", display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center" }}
+          className={"ParallaxLayer"}
+        >
+          <div ref={proyectsPageRef} style={{}}>
+            <h2>
+              {ProyectH2Effect.map((h2animationProyect, index) => (
+                <animated.i key={index} style={{ ...h2animationProyect }}>
+                  {h2TextProyectSplited[index]}
+                </animated.i>
+              ))}
+            </h2>
+          </div>
         </ParallaxLayer>
       </Parallax>
     </animated.div>

@@ -13,7 +13,11 @@ export const Tech = () => {
   const [refUseInView, inViewApi] = useInView({
     rootMargin: "0px 0px -0% 0px",
   });
-  const items = ["Hi, I'm Melanie, a Software Engineer Student from Dominican Republic.", "I’m passionate about solving programming challenges and bringing creative projects to life."];
+  const items = [
+    "Hi, I'm Melanie, a Software Engineer Student from Dominican Republic.",
+    "I’m passionate about solving programming challenges and bringing creative projects to life.",
+    <i className="tools">My tools:</i>,
+  ];
 
   const [trails, trailsApi] = useTrail(
     items.length,
@@ -159,11 +163,11 @@ export const Tech = () => {
 
   const [trailsBonce, trailsBonceApi] = useTrail(icons.length, () => ({
     from: { opacity: 0, x: 20, height: 0 },
-    config: { mass: 5, tension: 2000, friction: 200, duration: 300 },
+    config: { mass: 5, tension: 2000, friction: 200, duration: 200 },
   }));
 
   useEffect(() => {
-    console.log(inViewApi);
+    //console.log(inViewApi);
     if (inViewApi) {
       trailsApi.start({
         opacity: 1,
@@ -179,8 +183,6 @@ export const Tech = () => {
     } else {
       trailsApi.start({
         opacity: 0,
-        x: 20,
-        height: 0,
       });
 
       trailsBonceApi.start({
@@ -203,10 +205,6 @@ export const Tech = () => {
       </div>
 
       <animated.div>
-        <animated.p style={{ ...trailsApi }}>
-          <strong>My tools:</strong>
-        </animated.p>
-
         <div style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
           {trailsBonce.map((animationBounceStyle, index) => (
             <animated.div key={index} style={{ ...animationBounceStyle, marginBottom: "40px" }}>
