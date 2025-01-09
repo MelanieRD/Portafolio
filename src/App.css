@@ -5,14 +5,18 @@
   display: flex;
 }
 
-.character {
-  display: flex;
+.rightImg {
+  justify-content: flex-end;
+}
+.leftImg {
+  justify-content: flex-start;
+}
+.centerImg {
   justify-content: center;
-  align-items: center;
 }
 
-h2 {
-  margin-top: 40px;
+h2,
+.proyectsTitle {
   text-align: center;
   font-family: system-ui;
   font-weight: 600;
@@ -20,13 +24,36 @@ h2 {
   font-size: 15vh;
   text-shadow: -0.04em 0.04em 0 #000, 0.04em 0.04em 0 #000, 0.04em -0.04em 0 #000, -0.04em -0.04em 0 #000;
 }
-
-.backg {
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
+h2 {
+  margin-top: 40px;
 }
 
+.backg {
+  background-size: contain;
+}
+
+.backgImageRight {
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+.backgImageLeft {
+  background-position: left;
+}
+
+.ParallaxLayerProyects {
+  display: flex;
+  background-color: #000000;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.proyectsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 30px;
+}
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

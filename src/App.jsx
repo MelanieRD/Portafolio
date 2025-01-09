@@ -6,6 +6,7 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { a, animated, useInView, useScroll, useSpring, useTrail } from "@react-spring/web";
 import { Tech } from "./components/Tech/Tech";
 import { use } from "react";
+import { Proyect } from "./components/Proyect/Proyect";
 
 function App() {
   const [xcharacterCurrentPosition, setXCharacterCurrentPosition] = useState(0);
@@ -167,10 +168,10 @@ function App() {
   return (
     <animated.div className="App" style={{ display: "flex", scrollSnapType: "y mandatory" }}>
       {/* character */}
-      <Parallax pages={3} ref={containerRef} onScrollCapture={handleScroll} style={{ ...gradientBg }} id="parallax">
+      <Parallax pages={3.2} ref={containerRef} onScrollCapture={handleScroll} style={{ ...gradientBg }} id="parallax">
         {/* <ParallaxLayer sticky={{ start: 0.4, end: 1.5 }} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}> */}
 
-        <ParallaxLayer sticky={{ start: 0.4, end: 0.9 }} className={"layerIMG character ParrallaxLayer"} style={{ ...characterSize }}>
+        <ParallaxLayer sticky={{ start: 0.4, end: 0.9 }} className={"layerIMG centerImg"} style={{ ...characterSize }}>
           <animated.img className={"imgC"} src="/img/girl.png" style={{ ...opacity, ...moveCharacter }} ref={characterRef} />
         </ParallaxLayer>
 
@@ -180,27 +181,27 @@ function App() {
 
         {/* Background */}
 
-        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer"}>
+        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer leftImg"}>
           <animated.img className={"backg"} src="/img/bg/rightcloud.png" style={{ transform: "scaleX(-1)", ...opacity, ...cloud1 }} />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer"}>
+        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer rightImg"}>
           <animated.img className={"backg"} src="/img/bg/rightcloud.png" style={{ ...opacity, ...cloud1 }} />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={0.1} factor={1} speed={1} className={"layerIMG ParallaxLayer"}>
+        <ParallaxLayer offset={0.1} factor={1} speed={1} className={"layerIMG ParallaxLayer centerImg"}>
           <animated.img className={"backg"} src="/img/bg/galaxy.png" style={{ ...opacity, ...rotate }} />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer"}>
+        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer leftImg"}>
           <animated.img className={"backg"} src="/img/bg/leftCloud.png" style={{ ...opacity, ...cloud2 }} />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer"}>
+        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer leftImg"}>
           <animated.img className={"backg"} src="/img/bg/leftCloud.png" style={{ transform: "scaleY(-1)", ...opacity, ...cloud2 }} />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer"}>
+        <ParallaxLayer offset={0} factor={1} speed={0.5} className={"layerIMG ParallaxLayer rightImg"}>
           <animated.img className={"backg"} src="/img/bg/leftCloud.png" style={{ transform: "scale(-1,-1)", ...opacity, ...cloud2 }} />
         </ParallaxLayer>
 
@@ -226,21 +227,19 @@ function App() {
 
         {/* Proyects */}
 
-        <ParallaxLayer
-          speed={0.5}
-          offset={2}
-          factor={0.5}
-          style={{ backgroundColor: "black", display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center" }}
-          className={"ParallaxLayer"}
-        >
-          <div ref={proyectsPageRef} style={{}}>
-            <h2>
-              {ProyectH2Effect.map((h2animationProyect, index) => (
-                <animated.i key={index} style={{ ...h2animationProyect }}>
-                  {h2TextProyectSplited[index]}
-                </animated.i>
-              ))}
-            </h2>
+        <ParallaxLayer speed={0.5} offset={2} factor={1.5} className={"ParallaxLayerProyects"}>
+          <div ref={proyectsPageRef} style={{}} className="proyectsTitle">
+            {ProyectH2Effect.map((h2animationProyect, index) => (
+              <animated.i key={index} style={{ ...h2animationProyect }}>
+                {h2TextProyectSplited[index]}
+              </animated.i>
+            ))}
+
+            <div className="proyectsContainer">
+              <Proyect />
+              <Proyect />
+              <Proyect />
+            </div>
           </div>
         </ParallaxLayer>
       </Parallax>
